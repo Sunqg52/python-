@@ -17,7 +17,7 @@ from urllib.error import URLError
 username = "用户名/邮箱"
 password = "密码"
 # 登录页面的url 本程序运行完成后 刷新即可登入
-url = "https://github.com/login?return_to=%2Fjoin%3Fref_cta%3DSign%2Bup%26ref_loc%3Dheader%2Blogged%2Bout%26ref_page%3D%252F%26source%3Dheader-home"
+url = "登录页url链接"
 
 p = HTTPPasswordMgrWithDefaultRealm()			# 实例化对象
 p.add_password(None, url, username, password)	# 添加用户名密码
