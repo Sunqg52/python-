@@ -8,12 +8,25 @@ urllib主要包含四个模块：
 	error: 处理异常
 	parse: 提供了URL的处理方法
 	robotparser: 用于识别网站的robot.txt文件
-"""
-"""
-默认使用GET方式请求
-urlopen(url, data=None, [timeout,]*, cafile=None, 
-	capath=Node, cadefault=False, context=None, 
-	)
+
+urlopen() 方法：
+	class urllib.request.urlopen(url, data=None, [timeout,]*, cafile=None, 
+		capath=Node, cadefault=False, context=None, 
+		)     默认使用GET方式请求
+
+Request方法：
+	class urllib.request.Request(url, data=None, headers={}, 
+		origin_req_host=None, unverifiable=False, method=None
+		)
+
+
+参数含义：
+	url:请求信息  必选参数
+	data: 附加数据 可选参数
+	headers: 请求头（能通过修改User-Agent让我们伪装成浏览器）
+	origin_req_host：请求方的host名称或IP地址
+	unverifiable: 权限验证
+	method: 用于指示请求的方式(GET/POST)
 """
 """
 #添加data参数，添加后请求方式转为POST,若是自己留编码格式的内容，即bytes类型，则需要通过bytes()方法转化
@@ -27,10 +40,11 @@ except urllib.error.URLError as e:
 else:
 	print(response.read())
 """
-# print(response.read().decode('utf-8'))   # 返回的是一个网页
-# print(type(response))
 """
-#response = urllib.request.urlopen('https://www.csdn.net/?spm=1011.2124.3001.4476')
+response = urllib.request.urlopen('https://www.csdn.net/?spm=1011.2124.3001.4476')
+print(response.read().decode('utf-8'))   # 返回的是一个网页
+print(type(response))
+
 
 返回的是一个 HTTPResponse 对象
 这个对象包含：
@@ -43,19 +57,10 @@ print(response.getheaders())			# 响应的头信息
 print(response.getheader('Server'))		# 获取服务器名称
 """
 
+
+
 """
-Request方法：
-class urllib.request.Request(url, data=None, headers={}, 
-	origin_req_host=None, unverifiable=False, method=None
-	)
-参数含义：
-	url:请求信息  必选参数
-	data: 附加数据 可选参数
-	headers: 请求头（能通过修改User-Agent让我们伪装成浏览器）
-	origin_req_host：请求方的host名称或IP地址
-	unverifiable: 权限验证
-	method: 用于指示请求的方式(GET/POST)
-"""
+# 使用Request方法
 url = 'https://httpbin.org/post'
 headers = {
 	'User-Agent': 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
@@ -68,3 +73,4 @@ req = request.Request(url=url, data=data, headers=headers, method='POST')
 response = request.urlopen(req)
 
 print(response.read().decode('utf8'))
+"""
